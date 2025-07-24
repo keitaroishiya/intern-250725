@@ -23,7 +23,7 @@ function Ishiya() {
             <div className="mypage-info">
               <div className="mypage-info-item">
                 <span className="label">メール:</span>
-                <span className="value">ishiya@abc.123</span>
+                <span className="value">ishiya@abc.1234</span>
               </div>
               <div className="mypage-info-item">
                 <span className="label">部署:</span>
