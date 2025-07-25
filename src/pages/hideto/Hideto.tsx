@@ -7,10 +7,10 @@ import { useState } from 'react'
 
 function Hideto() {
      const [eventName, setEventName] = useState('');
-      const [searchResults, setSearchResults] = useState<any>(null);
+      const [searchResults, setSearchResults] = useState<any[]>([]);
       const [loading, setLoading] = useState(false);
       const [error, setError] = useState('');
-      const [rawHtml, setRawHtml] = useState('');
+     
     
       const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -31,12 +31,7 @@ function Hideto() {
           
           setSearchResults(filteredEvents);
           
-          setRawHtml(`
-            <div class="search-query">
-              <h3>検索クエリ: ${eventName}</h3>
-              <p>検索結果: ${filteredEvents.length}件</p>
-            </div>
-          `);
+
         } catch (err) {
           setError('データの取得中にエラーが発生しました。');
           console.error(err);
@@ -104,6 +99,7 @@ function Hideto() {
                     {loading ? '検索中...' : '検索'}
                     </button>
                 </form>
+                 
                 </section>
 
                 <section className="output-section">
@@ -112,13 +108,11 @@ function Hideto() {
                 {error && <p className="error">{error}</p>}
                 
                 {/* output raw html through dangerouslySetInnerHTML */}
-                {rawHtml && (
-                    <div className="raw-output">
-                    <div 
-                        className="vulnerable-container"
-                        dangerouslySetInnerHTML={{ __html: rawHtml }}
-                    />
-                    </div>
+                {eventName && (
+                  <div className="search-query">
+                    <h3>検索クエリ: {eventName}</h3>
+                    <p>検索結果: {searchResults.length}件</p>
+                  </div>
                 )}
                 
                 {searchResults && searchResults.length > 0 ? (
