@@ -12,7 +12,7 @@ function yusei() {
   const [searchResults, setSearchResults] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [rawHtml, setRawHtml] = useState('');
+  const [submittedQuery, setSubmittedQuery] = useState<string | null>(null);
 
   // カスタムツールチップの状態を管理
   const [tooltip, setTooltip] = useState({
@@ -27,8 +27,8 @@ function yusei() {
     setTooltip({
       visible: true,
       content: description,
-      x: e.clientX, // マウスのX座標
-      y: e.clientY, // マウスのY座標
+      x: e.clientX,
+      y: e.clientY,
     });
   };
 
@@ -57,13 +57,7 @@ function yusei() {
       
       setSearchResults(filteredproducts);
       
-      // Create unsafe HTML that includes the raw product input - THIS IS INTENTIONALLY VULNERABLE
-      setRawHtml(`
-        <div class="search-query">
-          <h3>検索クエリ: ${proname}</h3>
-          <p>検索結果: ${filteredproducts.length}件</p>
-        </div>
-      `);
+      
     } catch (err) {
       setError('データの取得中にエラーが発生しました。');
       console.error(err);
@@ -71,6 +65,7 @@ function yusei() {
       setLoading(false);
     }
   };
+
   return (
     <div className="yusei">
       {tooltip.visible && (
@@ -108,7 +103,7 @@ function yusei() {
               </div>
               <div className="yusei-info-item">
                 <span className="label">入社日:</span>
-                <span className="value">2025/04/01</span>
+                <span className="value">2027/04/01</span>
               </div>
             </div>
           </div>
@@ -140,12 +135,10 @@ function yusei() {
           
           {error && <p className="error">{error}</p>}
           
-          {rawHtml && (
-            <div className="raw-output">
-              <div 
-                className="vulnerable-container"
-                dangerouslySetInnerHTML={{ __html: rawHtml }}
-              />
+          {submittedQuery !== null && !loading && (
+            <div className="search-query">
+              <h3>検索クエリ: {submittedQuery}</h3>
+              {searchResults && <p>検索結果: {searchResults.length}件</p>}
             </div>
           )}
           
@@ -195,7 +188,6 @@ function yusei() {
     </div>
           
 
-          {/* トップに戻るリンク */}
           <div className="yusei-links">
             <Link to="/" className="yusei-link">ホームに戻る</Link>
           </div>

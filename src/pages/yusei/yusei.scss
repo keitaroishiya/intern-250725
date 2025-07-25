@@ -97,6 +97,7 @@ $price-color: #007bff;
     margin-top: 2rem;
     display: block;
   }
+  
 }
 
 // レスポンシブ対応
@@ -126,17 +127,17 @@ $price-color: #007bff;
 }
 
 .custom-tooltip {
-  position: fixed; // 画面を基準に位置を決定
+  position: fixed;
   background-color: #333;
   color: #fff;
   padding: 10px 15px;
   border-radius: 6px;
-  font-size: 1rem; // フォントサイズを大きく
-  max-width: 300px; // 横幅の最大値を設定
-  z-index: 1000; // 他のどの要素よりも手前に表示
-  pointer-events: none; // ツールチップ自身がマウスイベントを邪魔しないように
+  font-size: 1rem;
+  max-width: 300px;
+  z-index: 1000;
+  pointer-events: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  white-space: pre-wrap; // 改行をそのまま表示
+  white-space: pre-wrap;
 }
 
 // 商品検索ページのスタイル
@@ -166,9 +167,7 @@ $price-color: #007bff;
 
   .main {
     display: grid;
-    /* ===== ▼▼ ここを修正 ▼▼ ===== */
-    grid-template-columns: 1fr; // 2カラムから1カラムに変更
-    /* ===== ▲▲ ここまで修正 ▲▲ ===== */
+    grid-template-columns: 1fr;
     gap: 30px;
 
     
@@ -177,10 +176,6 @@ $price-color: #007bff;
     }
   }
 
-  .back-link {
-    margin-top: 60px;
-    text-align: center;
-  }
 
   .demo-section, .output-section {
     background: #f5f5f5;
