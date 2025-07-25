@@ -5,7 +5,11 @@ import NotFound from './pages/not-found'
 import Api from './pages/api'
 import User from './pages/user'
 import Ishiya from './pages/ishiya'
+<<<<<<< HEAD
 import Yusei from './pages/yusei'
+=======
+import Hideto from './pages/hideto'
+>>>>>>> 176bbb9ec19877c2345d34fa9d4cb6302a7f8aed
 
 import './App.scss'
 
@@ -19,8 +23,12 @@ function App() {
         <Route path="/api" element={<Api />} />
         <Route path="/user" element={<User />} />
         <Route path="/ishiya" element={<Ishiya />} />
+<<<<<<< HEAD
         <Route path="/yusei" element={<Yusei />} />
 
+=======
+        <Route path="/Hideto" element={<Hideto />} />
+>>>>>>> 176bbb9ec19877c2345d34fa9d4cb6302a7f8aed
         <Route path="*" element={<NotFound />} />
       </Routes>
       
