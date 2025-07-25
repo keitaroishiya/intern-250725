@@ -4,15 +4,21 @@ import './User.scss'
 
 function User() {
   const [username, setUsername] = useState('');
-  const [searchResults, setSearchResults] = useState<any>(null);
+  const [searchResults, setSearchResults] = useState<any[] | null>(null); // 型をより具体的に
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [rawHtml, setRawHtml] = useState('');
+  // rawHtml ステートを削除
+  // const [rawHtml, setRawHtml] = useState('');
+  
+  // 検索クエリを保持するための新しいステート
+  const [submittedQuery, setSubmittedQuery] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setSearchResults(null);
+    setSubmittedQuery(username); // フォーム送信時の検索クエリを保存
     
     try {
       // Fetch users from the API
@@ -30,13 +36,8 @@ function User() {
       
       setSearchResults(filteredUsers);
       
-      // Create unsafe HTML that includes the raw user input - THIS IS INTENTIONALLY VULNERABLE
-      setRawHtml(`
-        <div class="search-query">
-          <h3>検索クエリ: ${username}</h3>
-          <p>検索結果: ${filteredUsers.length}件</p>
-        </div>
-      `);
+      // rawHtml の生成ロジックを削除
+      
     } catch (err) {
       setError('データの取得中にエラーが発生しました。');
       console.error(err);
@@ -76,14 +77,12 @@ function User() {
           <h2>検索結果</h2>
           
           {error && <p className="error">{error}</p>}
-          
-          {/* output raw html through dangerouslySetInnerHTML */}
-          {rawHtml && (
-            <div className="raw-output">
-              <div 
-                className="vulnerable-container"
-                dangerouslySetInnerHTML={{ __html: rawHtml }}
-              />
+
+          {/* dangerouslySetInnerHTML を使わず、安全に検索クエリと結果を表示する */}
+          {submittedQuery !== null && !loading && (
+            <div className="search-query">
+              <h3>検索クエリ: {submittedQuery}</h3>
+              {searchResults && <p>検索結果: {searchResults.length}件</p>}
             </div>
           )}
           
@@ -113,7 +112,7 @@ function User() {
                 </tbody>
               </table>
             </div>
-          ) : searchResults && searchResults.length === 0 ? (
+          ) : submittedQuery !== null && !loading && searchResults?.length === 0 ? (
             <p>該当するユーザーは見つかりませんでした。</p>
           ) : null}
           
@@ -127,4 +126,4 @@ function User() {
   );
 }
 
-export default User
+export default User;
