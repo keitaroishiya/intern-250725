@@ -33,8 +33,6 @@ function App() {
           <Link to="/api">API</Link>
           <span> | </span>
           <Link to="/user">ユーザー検索</Link>
-          <span> | </span>
-          <Link to="/yusei">ゆうせい</Link>
         </div>
         <div className="footer-inner">
           Copyright (c) 2025 GMO Internet, Inc. All Rights Reserved.
