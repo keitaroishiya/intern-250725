@@ -26,11 +26,8 @@ function Home() {
             <li><Link to="/mypage">マイページ</Link></li>
             <li><Link to="/user">ユーザー検索</Link></li>
             <li><Link to="/ishiya">いしや</Link></li>
-<<<<<<< HEAD
             <li><Link to="/yusei">ゆうせい</Link></li>
-=======
             <li><Link to="/hideto">ひでと</Link></li>
->>>>>>> 176bbb9ec19877c2345d34fa9d4cb6302a7f8aed
           </ul>
         </section>
       </div>
