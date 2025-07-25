@@ -5,6 +5,7 @@ import NotFound from './pages/not-found'
 import Api from './pages/api'
 import User from './pages/user'
 import Ishiya from './pages/ishiya'
+import Yusei from './pages/yusei'
 
 import './App.scss'
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/api" element={<Api />} />
         <Route path="/user" element={<User />} />
         <Route path="/ishiya" element={<Ishiya />} />
+        <Route path="/yusei" element={<Yusei />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -31,6 +33,8 @@ function App() {
           <Link to="/api">API</Link>
           <span> | </span>
           <Link to="/user">ユーザー検索</Link>
+          <span> | </span>
+          <Link to="/yusei">ゆうせい</Link>
         </div>
         <div className="footer-inner">
           Copyright (c) 2025 GMO Internet, Inc. All Rights Reserved.
