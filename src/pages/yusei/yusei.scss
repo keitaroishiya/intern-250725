@@ -1,9 +1,13 @@
+@use 'sass:color'; 
+
 // 自分のページのスタイル
 $primary-color: #646cff;
 $background-color: #f9f9f9;
 $border-color: #e0e0e0;
 $text-color: #333;
 $light-text-color: #666;
+$card-bg-color: #ffffff;
+$price-color: #007bff;
 
 .yusei {
   min-height: 100vh;
@@ -88,6 +92,11 @@ $light-text-color: #666;
     }
   }
   
+  &-links {
+    text-align: center;
+    margin-top: 2rem;
+    display: block;
+  }
 }
 
 // レスポンシブ対応
@@ -113,97 +122,244 @@ $light-text-color: #666;
         margin-bottom: 0.25rem;
       }
     }
-    &-links {
-      text-align: center;
-      margin-top: 1rem;
-    }
   }
 }
 
-/* yusei.scss に追加 */
+.custom-tooltip {
+  position: fixed; // 画面を基準に位置を決定
+  background-color: #333;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 1rem; // フォントサイズを大きく
+  max-width: 300px; // 横幅の最大値を設定
+  z-index: 1000; // 他のどの要素よりも手前に表示
+  pointer-events: none; // ツールチップ自身がマウスイベントを邪魔しないように
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  white-space: pre-wrap; // 改行をそのまま表示
+}
 
-.yusei-todo-feature {
-  margin-top: 30px;
+// 商品検索ページのスタイル
+.pro-page {
+  max-width: 1000px;
+  margin: 0 auto;
   padding: 20px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background-color: #f9f9f9;
 
-  .yusei-feature-title {
-    margin-top: 0;
+  .header {
+    margin-bottom: 30px;
+    text-align: center;
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .warning {
+      color: #e53935;
+      font-weight: bold;
+      padding: 10px;
+      background-color: #ffebee;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+  }
+
+  .main {
+    display: grid;
+    /* ===== ▼▼ ここを修正 ▼▼ ===== */
+    grid-template-columns: 1fr; // 2カラムから1カラムに変更
+    /* ===== ▲▲ ここまで修正 ▲▲ ===== */
+    gap: 30px;
+
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .back-link {
+    margin-top: 60px;
     text-align: center;
   }
-}
 
-.yusei-todo-input-area {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  .demo-section, .output-section {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 
-  .yusei-todo-input {
-    flex-grow: 1;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
+    h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #333;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 10px;
+    }
+
+    code {
+      background-color: #e0e0e0;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+      word-break: break-all;
+    }
+    
+    .examples {
+      margin: 15px 0;
+      padding: 10px;
+      background-color: #e8f5e9;
+      border-radius: 4px;
+      border-left: 4px solid #4caf50;
+      
+      h3 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 1rem;
+        color: #2e7d32;
+      }
+      
+      ul {
+        margin: 0;
+        padding-left: 20px;
+        
+        li {
+          margin-bottom: 5px;
+          word-break: break-all;
+        }
+      }
+    }
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+    
+    textarea {
+      resize: vertical;
+    }
+  }
+
+  button {
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
     border-radius: 4px;
-    font-size: 1em;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+
+    &:hover:not(:disabled) {
+      background-color: #1976d2;
+    }
+    
+    &:disabled {
+      background-color: #b0bec5;
+      cursor: not-allowed;
+    }
   }
-}
 
-/* 汎用ボタンのスタイルを少し調整 */
-.yusei-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s;
-  white-space: nowrap; // ボタン内のテキストが改行されないように
-
-  &:hover {
-    background-color: #0056b3;
-  }
-}
-
-.yusei-todo-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-
-  li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .error {
+    color: #d32f2f;
+    background-color: #ffebee;
     padding: 10px;
-    border-bottom: 1px solid #eee;
-
-    &:last-child {
-      border-bottom: none;
+    border-radius: 4px;
+    margin: 10px 0;
+  }
+  
+  .raw-output {
+    margin-bottom: 20px;
+    
+    h3 {
+      color: #d32f2f;
+      margin-bottom: 10px;
     }
-
-    .todo-text {
-      cursor: pointer;
-      user-select: none; // テキスト選択を無効化
-    }
-
-    &.completed .todo-text {
-      text-decoration: line-through;
-      color: #999;
+    
+    .vulnerable-container {
+      border: 2px dashed #f44336;
+      padding: 15px;
+      background-color: white;
+      border-radius: 4px;
+      overflow: auto;
     }
   }
-}
+  
+  .pro-results {
+    margin-top: 20px;
+    overflow-x: auto;
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
 
-.delete-button {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+      table-layout: fixed;
+      word-wrap: break-word;
+      
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      
+      th {
+        background-color: #f0f0f0;
+        font-weight: bold;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      
+      tr:hover {
+        background-color: #f1f8e9;
+      }
 
-  &:hover {
-    background-color: #c82333;
+      .description-cell {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;  
+      }
+    }
+  }
+  
+  .explanation {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #e3f2fd;
+    border-radius: 4px;
+    border-left: 4px solid #2196f3;
+    
+    h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #0d47a1;
+    }
+    
+    p {
+      margin-bottom: 8px;
+    }
+    
+    ul {
+      margin-top: 8px;
+      padding-left: 20px;
+      
+      li {
+        margin-bottom: 5px;
+      }
+    }
   }
 }
