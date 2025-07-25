@@ -41,6 +41,7 @@ function yusei() {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setSubmittedQuery(proname);
     
     try {
       // Fetch products from the API
